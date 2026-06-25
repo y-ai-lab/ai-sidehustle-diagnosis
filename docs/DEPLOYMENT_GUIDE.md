@@ -71,6 +71,33 @@ GitHub Actions:
 6. XシェアURLに公開URLが含まれる
 7. CTAがURL未設定なら準備中表示のままになっている
 
+## 公開URLが404になる場合
+
+`https://pachitjp-ai.github.io/ai-sidehustle-diagnosis/` が `There isn't a GitHub Pages site here.` になる場合は、コードより先にGitHub側の設定を確認します。
+
+確認する場所:
+
+1. GitHubリポジトリの `Settings > Pages`
+2. `Build and deployment > Source`
+3. Sourceが `GitHub Actions` になっているか
+4. `Actions` タブの `Deploy to GitHub Pages` が成功しているか
+
+よくある原因:
+
+- PagesのSourceがまだ `GitHub Actions` になっていない
+- 初回デプロイがまだ完了していない
+- リポジトリがprivateで、Pages公開設定や権限が不足している
+- Actionsが失敗して `dist/` がデプロイされていない
+
+GitHub Actionsが失敗している場合は、まずログで `Install dependencies` と `Build` のどちらで止まっているかを確認します。
+ローカルで再確認するときは、Windows PowerShellでは以下を順番に実行します。
+
+```bash
+npm.cmd install
+npm.cmd run build
+npm.cmd test
+```
+
 ## 代替候補
 
 Vercel:
