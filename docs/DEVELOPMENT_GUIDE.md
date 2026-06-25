@@ -129,6 +129,7 @@ build/testは並列実行せず、この順番で実行してください。
 ## 公開前チェック
 
 公開前は [PUBLISH_CHECKLIST.md](PUBLISH_CHECKLIST.md) を確認します。
+公開方法を決める場合は [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) を確認します。
 本番URL、課金、アフィリエイト、メール登録導線を入れる場合は、ユーザー確認が必要な変更として扱ってください。
 公開URLやCTA本番URLの設定手順は [URL_SETUP_GUIDE.md](URL_SETUP_GUIDE.md) を確認します。
 

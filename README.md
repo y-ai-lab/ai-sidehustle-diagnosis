@@ -18,6 +18,7 @@ AI副業初心者向けの無料診断サイトです。
 今後Codexで開発を進めるときは、先に [docs/DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md) を確認してください。
 編集場所、build/test手順、Codexへの依頼テンプレート、やってはいけないことをまとめています。
 公開前の確認は [docs/PUBLISH_CHECKLIST.md](docs/PUBLISH_CHECKLIST.md) を使ってください。
+公開方法を決めるときは [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) を確認してください。
 公開URLやCTA本番URLを設定するときは [docs/URL_SETUP_GUIDE.md](docs/URL_SETUP_GUIDE.md) を使ってください。
 Git管理を始める前は [docs/GIT_START_CHECKLIST.md](docs/GIT_START_CHECKLIST.md) を確認してください。
 リモートリポジトリへ接続するときは [docs/REMOTE_REPO_GUIDE.md](docs/REMOTE_REPO_GUIDE.md) を確認してください。
