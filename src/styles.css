@@ -14,8 +14,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero, .quizPage, .resultPage { width: 100%; max-width: 720px; }
 .hero { padding: 48px 0; }
 .eyebrow { display: inline-flex; padding: 7px 12px; border-radius: 999px; background: #e8f1ff; color: #1d4ed8; font-size: 13px; font-weight: 700; }
-h1 { font-size: clamp(34px, 8vw, 58px); line-height: 1.05; margin: 18px 0; letter-spacing: -0.04em; }
-h2 { font-size: 22px; margin: 0 0 14px; letter-spacing: -0.02em; }
+h1 { font-size: clamp(34px, 8vw, 58px); line-height: 1.05; margin: 18px 0; letter-spacing: 0; }
+h2 { font-size: 22px; margin: 0 0 14px; letter-spacing: 0; }
+h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .lead { font-size: 18px; line-height: 1.8; color: #374151; margin: 0 0 24px; }
 .heroNote { color: #4b5563; line-height: 1.7; margin: -8px 0 24px; }
 .muted, .disclaimer { color: #6b7280; line-height: 1.7; }
@@ -51,15 +52,16 @@ h2 { font-size: 22px; margin: 0 0 14px; letter-spacing: -0.02em; }
 .scoreItem strong { font-size: 24px; color: #2563eb; }
 .infoSection, .promptBox, .ctaBox, .roadmapPreview { padding: 22px; margin: 14px 0; }
 .infoSection ul, .infoSection ol { margin: 0; padding-left: 22px; line-height: 1.8; color: #374151; }
+.infoSection li + li { margin-top: 6px; }
 .roadmapPreview p { color: #374151; line-height: 1.8; margin: 0 0 16px; }
 .roadmapPhaseList { display: grid; gap: 10px; }
 .roadmapPhase { box-shadow: none; padding: 0; overflow: hidden; }
-.roadmapPhase summary { list-style: none; padding: 16px; cursor: pointer; }
+.roadmapPhase summary { position: relative; list-style: none; padding: 16px 44px 16px 16px; cursor: pointer; }
 .roadmapPhase summary::-webkit-details-marker { display: none; }
-.roadmapPhase summary::after { content: "+"; float: right; color: #2563eb; font-weight: 900; }
+.roadmapPhase summary::after { content: "+"; position: absolute; top: 16px; right: 16px; color: #2563eb; font-weight: 900; }
 .roadmapPhase[open] summary::after { content: "-"; }
 .roadmapPhase span { display: inline-flex; margin-bottom: 8px; color: #2563eb; font-size: 13px; font-weight: 900; }
-.roadmapPhase strong { display: block; padding-right: 24px; }
+.roadmapPhase strong { display: block; line-height: 1.45; }
 .roadmapPhase ul { margin: 0; padding-left: 20px; color: #374151; line-height: 1.7; }
 .roadmapPhase[open] ul { padding: 0 16px 16px 36px; }
 .promptBox { background: #0f172a; color: #fff; }
