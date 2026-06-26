@@ -28,8 +28,8 @@ export const results: Record<ResultContent['type'], ResultContent> = {
     ],
     firstSteps: [
       '書く相手を1人に絞る。例: AI副業を始めたい会社員。',
-      'その人の悩みを20個書き出し、AIに投稿案へ変換してもらう。',
-      '反応が良さそうな投稿を10本作り、1つを500〜980円のテンプレ案にする。',
+      'その人の悩みを20個出し、AIで投稿案に変える。',
+      '投稿を10本作り、1つを500〜980円のテンプレ案にする。',
     ],
     roadmap7Days: [
       'Day1: 誰に向けて書くかを1文で決める',
@@ -38,7 +38,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
       'Day4: 反応が良さそうなテーマでnoteの無料部分を書く',
       'Day5: 有料部分に入れるチェックリストやテンプレを作る',
       'Day6: タイトル、目次、販売説明文を整える',
-      'Day7: 制作ログと学びをXに投稿し、次の改善点を決める',
+      'Day7: 制作ログをXに投稿し、改善点を1つ決める',
     ],
     aiTools: ['ChatGPT', 'Claude', 'Googleドキュメント', 'Canva'],
   },
@@ -68,13 +68,13 @@ export const results: Record<ResultContent['type'], ResultContent> = {
       '広告費をかけて一気に売る方法',
     ],
     firstSteps: [
-      '誰が使う画像かを決める。例: 個人サロンのInstagram投稿。',
-      'AIで30案を出し、似ている案を削って10案に絞る。',
-      '3案だけ販売ページ風に整え、SNSで反応を見てから増やす。',
+      '使う人を決める。例: 個人サロンのInstagram投稿。',
+      'AIで30案を出し、似た案を削って10案に絞る。',
+      '3案だけ商品ページ風に整え、SNSで反応を見る。',
     ],
     roadmap7Days: [
       'Day1: 作るジャンルを1つ決める',
-      'Day2: 使う人と使う場面を3パターン書く',
+      'Day2: 使う人と場面を3パターン書く',
       'Day3: AIでデザイン案を30個出す',
       'Day4: 10案に絞り、文字入れや余白を整える',
       'Day5: 商品名と説明文を3案作る',
@@ -86,7 +86,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
   tool: {
     type: 'tool',
     title: 'ノーコード/ミニツール開発型',
-    tagline: '小さな診断・計算・比較ツールを作り、役に立つ入口から収益導線を作るタイプです。',
+    tagline: '小さな診断・計算・比較ツールを作り、役立つ入口から収益導線を作るタイプです。',
     strengths: [
       '一度作ったものを何度も使ってもらえる',
       '無料ツールから自然に集客しやすい',
@@ -111,7 +111,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
     firstSteps: [
       '解決する悩みを1つに絞る。例: AI副業タイプを知りたい。',
       '入力、結果、次の行動の3画面だけを書き出す。',
-      'CodexやノーコードでMVPを作り、友人かXで3人に触ってもらう。',
+      'CodexやノーコードでMVPを作り、3人に触ってもらう。',
     ],
     roadmap7Days: [
       'Day1: 誰のどんな悩みを解くか決める',
@@ -120,14 +120,14 @@ export const results: Record<ResultContent['type'], ResultContent> = {
       'Day4: Codexやノーコードで動くMVPを作る',
       'Day5: スマホで触って崩れや誤字を直す',
       'Day6: 結果ページに仮CTAを置く',
-      'Day7: 制作ログを投稿し、改善点を3つ集める',
+      'Day7: 制作ログを投稿し、改善点を3つ聞く',
     ],
     aiTools: ['Codex', 'ChatGPT', 'Googleスプレッドシート', 'Vite'],
   },
   research: {
     type: 'research',
     title: 'リサーチ・まとめメディア型',
-    tagline: 'AIで調べ、比較し、初心者にわかりやすい記事やニュースレターに整えるタイプです。',
+    tagline: 'AIで調べて比較し、初心者向けの記事やニュースレターに整えるタイプです。',
     strengths: [
       '顔出しなしで信頼を積み上げやすい',
       '情報整理がそのまま価値になりやすい',
