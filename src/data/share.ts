@@ -4,7 +4,7 @@ export const shareContent: ShareContent = {
   siteName: '現実派AI副業診断',
   messageTemplate: '私は「{resultTitle}」でした。まず月1万円を現実的に目指すAI副業タイプを診断できます。',
   hashtags: ['現実派AI副業診断', 'AI副業'],
-  siteUrl: 'https://pachitjp-ai.github.io/ai-sidehustle-diagnosis/',
+  siteUrl: 'https://y-ai-lab.github.io/ai-sidehustle-diagnosis/',
 };
 
 export function buildShareUrl(result: ResultContent): string {
