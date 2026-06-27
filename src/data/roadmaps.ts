@@ -7,8 +7,12 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
     phases: [
       {
         period: '1週目',
-        title: '読者とテーマを絞る',
-        actions: ['誰向けに書くか1文で決める', '悩みを20個出す', '投稿案を10本作る'],
+        title: '身近な1人向けに書いてみる',
+        actions: [
+          '友人・過去の自分など、書きやすい相手を1人選ぶ',
+          'その人が困りそうなことを10個だけメモする',
+          '一番書きやすい悩みを選び、短い投稿を3本作る',
+        ],
       },
       {
         period: '2週目',
@@ -33,8 +37,12 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
     phases: [
       {
         period: '1週目',
-        title: '使う人と場面を決める',
-        actions: ['ニッチを1つ選ぶ', '使う場面を3つ書く', 'AIで30案出す'],
+        title: '好きな雰囲気で3案だけ作る',
+        actions: [
+          'カフェ、美容室、勉強アカウントなど身近なジャンルを1つ選ぶ',
+          'そのジャンルで使えそうな画像の場面を3つ書く',
+          'AIで10案だけ作り、気に入った3案を残す',
+        ],
       },
       {
         period: '2週目',
@@ -59,8 +67,12 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
     phases: [
       {
         period: '1週目',
-        title: '仕様を小さく決める',
-        actions: ['解決する悩みを1つ選ぶ', '入力と結果を書き出す', '画面構成を手書きする'],
+        title: '紙に3画面だけ書く',
+        actions: [
+          '自分や友人が少し面倒に感じることを1つ選ぶ',
+          '入力、結果、次の行動をメモに1行ずつ書く',
+          'トップ、入力、結果の3画面だけを紙に描く',
+        ],
       },
       {
         period: '2週目',
@@ -85,8 +97,12 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
     phases: [
       {
         period: '1週目',
-        title: 'テーマと比較軸を決める',
-        actions: ['読者を1人に絞る', '競合を10個見る', '比較軸を5つ決める'],
+        title: '気になるものを3つ比べる',
+        actions: [
+          '自分も知りたいAIツールや副業テーマを1つ選ぶ',
+          '候補を3つだけ集め、料金と使い道をメモする',
+          '初心者が迷いそうな点を3つ書く',
+        ],
       },
       {
         period: '2週目',
