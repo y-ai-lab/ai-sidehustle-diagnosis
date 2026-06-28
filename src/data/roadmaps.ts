@@ -3,7 +3,7 @@ import type { ResultType, RoadmapContent } from '../types';
 export const roadmaps: Record<ResultType, RoadmapContent> = {
   writing: {
     type: 'writing',
-    goal: '投稿10本、note下書き1本、500〜980円のテンプレ案1つを作る',
+    goal: 'X投稿5本、note無料記事1本、初心者向けチェックリスト1つを公開できる状態にする',
     phases: [
       {
         period: '1週目',
@@ -16,24 +16,24 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
       },
       {
         period: '2週目',
-        title: '発信して反応を見る',
-        actions: ['Xに3〜5本投稿する', '反応があった言葉をメモする', 'noteの構成を作る'],
+        title: 'Xに1本ずつ出して反応を見る',
+        actions: ['X投稿を3本公開する', 'いいね・保存・リプがあった言葉をメモする', '一番説明しやすいテーマでnote見出しを作る'],
       },
       {
         period: '3週目',
-        title: '小さな商品にする',
-        actions: ['チェックリストを作る', 'テンプレを1つ整える', '販売説明文を書く'],
+        title: '無料で配れる形にする',
+        actions: ['note無料記事を1本書く', '初心者向けチェックリストを1枚作る', '無料配布する場合の説明文を書く'],
       },
       {
         period: '4週目',
-        title: '改善して再投稿する',
-        actions: ['無料部分を見直す', '制作ログを投稿する', '次のテンプレ案を決める'],
+        title: '公開して改善点を集める',
+        actions: ['Xで制作ログを投稿する', 'チェックリストを無料または100〜300円で出せる状態にする', '反応があったら改善版の案を1つ決める'],
       },
     ],
   },
   creative: {
     type: 'creative',
-    goal: '販売候補のデザイン3案と、SNSで見せる投稿3本を作る',
+    goal: 'SNS画像の作例3枚、X投稿3本、Canva素材セット1つを公開できる状態にする',
     phases: [
       {
         period: '1週目',
@@ -46,24 +46,24 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
       },
       {
         period: '2週目',
-        title: '見せられる形に整える',
-        actions: ['10案に絞る', 'Canvaで文字と余白を整える', '商品名を3案作る'],
+        title: '作例として見せられる形にする',
+        actions: ['気に入った3案をCanvaで整える', 'それぞれに短い説明文を付ける', 'Xに1枚だけ投稿する'],
       },
       {
         period: '3週目',
-        title: '反応を見る',
-        actions: ['SNS投稿を3本作る', '反応が良い案を残す', '似た案を追加で作る'],
+        title: '無料素材セットに近づける',
+        actions: ['X投稿を合計3本出す', '保存や感想があった案を残す', '残した案をCanvaで編集できる形にする'],
       },
       {
         period: '4週目',
-        title: '販売候補にまとめる',
-        actions: ['3案だけ商品ページ風にする', '説明文を書く', '注意点や利用条件を整える'],
+        title: '配布できる状態にする',
+        actions: ['3枚セットとして説明文を書く', '無料または100〜300円で出す場合の案内文を作る', '著作権や商標に触れない内容か確認する'],
       },
     ],
   },
   tool: {
     type: 'tool',
-    goal: '1機能だけのMVPを作り、スマホで触れる状態にする',
+    goal: '1機能だけのMVPを公開し、3人に触ってもらい、改善点を3つ集める',
     phases: [
       {
         period: '1週目',
@@ -81,19 +81,19 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
       },
       {
         period: '3週目',
-        title: '結果と導線を整える',
-        actions: ['結果文を短くする', '仮CTAを置く', 'テストを追加する'],
+        title: '結果と次の行動を整える',
+        actions: ['結果文を短くする', '次に読むnoteやチェックリストへの仮CTAを置く', '最低限のテストや手動確認メモを作る'],
       },
       {
         period: '4週目',
-        title: '公開前の改善をする',
-        actions: ['誤字を直す', '制作ログを書く', '改善点を3つ集める'],
+        title: '公開して改善点を集める',
+        actions: ['誤字とスマホ表示を直す', 'Xやnoteに制作ログを書く', '3人に触ってもらい改善点を3つ集める'],
       },
     ],
   },
   research: {
     type: 'research',
-    goal: '比較表1本、短い記事1本、X投稿5本を作る',
+    goal: '比較表1本、note無料記事1本、X投稿5本、初心者向けチェックリスト1つを作る',
     phases: [
       {
         period: '1週目',
@@ -106,18 +106,18 @@ export const roadmaps: Record<ResultType, RoadmapContent> = {
       },
       {
         period: '2週目',
-        title: '情報を集めて確認する',
-        actions: ['AI検索で調べる', '公式情報を確認する', '比較表の下書きを作る'],
+        title: '情報を集めて公式情報も見る',
+        actions: ['AI検索で概要を調べる', '公式サイトや料金ページを確認する', '3候補の比較表を下書きする'],
       },
       {
         period: '3週目',
-        title: '記事と投稿にする',
-        actions: ['短い記事を書く', 'X投稿を5本作る', '根拠リンクを整理する'],
+        title: '記事とX投稿にする',
+        actions: ['note無料記事を1本書く', 'X投稿を3〜5本作る', '根拠リンクや公式ページを整理する'],
       },
       {
         period: '4週目',
-        title: '継続テーマを決める',
-        actions: ['反応を見直す', '次の比較テーマを選ぶ', 'ニュースレター導線を仮置きする'],
+        title: 'チェックリストにまとめる',
+        actions: ['反応があった比較軸を見直す', '初心者向けチェックリストを1枚作る', '次に調べるテーマを1つ選ぶ'],
       },
     ],
   },

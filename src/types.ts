@@ -28,8 +28,10 @@ export type ResultContent = {
   firstProductIdeas: string[];
   roadmap7Days: string[];
   goalAfter30Days: string;
+  goalAfter30DaysNote: string;
   cautions: string[];
   aiTools: string[];
+  toolGuidance: string[];
 };
 
 export type CtaContent = {

@@ -58,19 +58,21 @@ export function ResultPage({ result, scores, onRestart }: Props) {
       </section>
 
       <InfoSection title="あなたの強み" items={result.strengths} />
-      <InfoSection title="注意すべき弱み" items={result.weaknesses} />
-      <InfoSection title="向いているAI副業" items={result.suited} />
-      <InfoSection title="向いていないAI副業" items={result.unsuited} />
       <InfoSection title="最初の3ステップ" items={result.firstSteps} ordered />
+      <InfoSection title="向いている稼ぎ方" items={result.suited} />
+      <InfoSection title="向いていない稼ぎ方" items={result.unsuited} />
       <InfoSection title="収益化ルート" items={result.monetizationRoute} ordered />
       <InfoSection title="最初の商品案" items={result.firstProductIdeas} />
       <InfoSection title="7日間ロードマップ" items={result.roadmap7Days} />
       <section className="infoSection goalSection">
         <h2>30日後の目標</h2>
         <p>{result.goalAfter30Days}</p>
+        <p className="sectionNote">{result.goalAfter30DaysNote}</p>
       </section>
+      <InfoSection title="注意すべき弱み" items={result.weaknesses} />
       <InfoSection title="注意点" items={result.cautions} />
       <InfoSection title="まず使うAIツール" items={result.aiTools} />
+      <InfoSection title="ツールの課金判断" items={result.toolGuidance} />
 
       <section className="roadmapPreview">
         <h2>30日ロードマップの中身</h2>
@@ -97,6 +99,9 @@ export function ResultPage({ result, scores, onRestart }: Props) {
           <p><strong>noteに書くなら</strong>{cta.notePrompt}</p>
           <p><strong>Xで共有するなら</strong>{cta.xPrompt}</p>
         </div>
+        <p className="experimentCta">
+          成功談ではなく、実験ログとして。診断して終わりではなく、運営者自身も進捗・失敗・改善を公開しながら小さく試していきます。
+        </p>
         {!cta.url && <p className="ctaStatus">{cta.pendingMessage}</p>}
         <button className="primaryButton" disabled={!cta.url} onClick={handleCtaClick}>
           {cta.url ? cta.buttonLabel : cta.pendingLabel}

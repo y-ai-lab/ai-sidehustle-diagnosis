@@ -74,8 +74,10 @@ describe('calculate result', () => {
       expect(result.firstProductIdeas.length).toBeGreaterThan(0);
       expect(result.roadmap7Days).toHaveLength(7);
       expect(result.goalAfter30Days).toBeTruthy();
+      expect(result.goalAfter30DaysNote).toBeTruthy();
       expect(result.cautions.length).toBeGreaterThan(0);
       expect(result.aiTools.length).toBeGreaterThan(0);
+      expect(result.toolGuidance.length).toBeGreaterThan(0);
     });
   });
 
@@ -137,6 +139,7 @@ describe('calculate result', () => {
     expect(text).toContain('7日間ロードマップ');
     expect(text).toContain('30日後の目標');
     expect(text).toContain('注意点');
+    expect(text).toContain('ツールの課金判断');
     expect(text).toContain(shareContent.siteUrl);
   });
 });
