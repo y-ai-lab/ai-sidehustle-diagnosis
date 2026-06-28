@@ -57,22 +57,28 @@ export function ResultPage({ result, scores, onRestart }: Props) {
         ))}
       </section>
 
+      <section className="quickActionBox">
+        <p className="badge">まず今日やること</p>
+        <h2>{result.firstSteps[0]}</h2>
+        <p>全部やろうとしなくてOKです。まずはこの1つだけできれば、最初の前進です。</p>
+      </section>
+
       <InfoSection title="あなたの強み" items={result.strengths} />
       <InfoSection title="最初の3ステップ" items={result.firstSteps} ordered />
-      <InfoSection title="向いている稼ぎ方" items={result.suited} />
-      <InfoSection title="向いていない稼ぎ方" items={result.unsuited} />
+      <InfoSection title="向いている稼ぎ方" items={result.suited} collapsible defaultOpen />
+      <InfoSection title="向いていない稼ぎ方" items={result.unsuited} collapsible />
       <InfoSection title="収益化ルート" items={result.monetizationRoute} ordered />
-      <InfoSection title="最初の商品案" items={result.firstProductIdeas} />
-      <InfoSection title="7日間ロードマップ" items={result.roadmap7Days} />
+      <InfoSection title="最初の商品案" items={result.firstProductIdeas} collapsible />
+      <InfoSection title="7日間ロードマップ" items={result.roadmap7Days} collapsible defaultOpen />
       <section className="infoSection goalSection">
         <h2>30日後の目標</h2>
         <p>{result.goalAfter30Days}</p>
         <p className="sectionNote">{result.goalAfter30DaysNote}</p>
       </section>
-      <InfoSection title="注意すべき弱み" items={result.weaknesses} />
-      <InfoSection title="注意点" items={result.cautions} />
+      <InfoSection title="注意すべき弱み" items={result.weaknesses} collapsible />
+      <InfoSection title="注意点" items={result.cautions} collapsible />
       <InfoSection title="まず使うAIツール" items={result.aiTools} />
-      <InfoSection title="ツールの課金判断" items={result.toolGuidance} />
+      <InfoSection title="ツールの課金判断" items={result.toolGuidance} collapsible />
 
       <section className="roadmapPreview">
         <h2>30日ロードマップの中身</h2>
@@ -119,16 +125,31 @@ export function ResultPage({ result, scores, onRestart }: Props) {
   );
 }
 
-type InfoProps = { title: string; items: string[]; ordered?: boolean };
+type InfoProps = { title: string; items: string[]; ordered?: boolean; collapsible?: boolean; defaultOpen?: boolean };
 
-function InfoSection({ title, items, ordered }: InfoProps) {
+function InfoSection({ title, items, ordered, collapsible, defaultOpen }: InfoProps) {
   const Tag = ordered ? 'ol' : 'ul';
+  const content = (
+    <Tag>
+      {items.map((item) => <li key={item}>{item}</li>)}
+    </Tag>
+  );
+
+  if (collapsible) {
+    return (
+      <details className="infoSection collapsibleSection" open={defaultOpen}>
+        <summary>
+          <h2>{title}</h2>
+        </summary>
+        {content}
+      </details>
+    );
+  }
+
   return (
     <section className="infoSection">
       <h2>{title}</h2>
-      <Tag>
-        {items.map((item) => <li key={item}>{item}</li>)}
-      </Tag>
+      {content}
     </section>
   );
 }

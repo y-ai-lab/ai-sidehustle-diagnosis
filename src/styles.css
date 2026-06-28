@@ -27,7 +27,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .ghostButton { border: 1px solid #d1d5db; border-radius: 14px; padding: 12px 16px; background: #fff; color: #374151; font-weight: 700; cursor: pointer; }
 .ghostButton:disabled { opacity: .45; cursor: not-allowed; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 34px 0; }
-.cards div, .questionCard, .infoSection, .promptBox, .ctaBox, .scoreItem, .roadmapPreview, .roadmapPhase { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; box-shadow: 0 12px 36px rgba(15, 23, 42, .06); }
+.cards div, .questionCard, .infoSection, .promptBox, .ctaBox, .scoreItem, .roadmapPreview, .roadmapPhase, .quickActionBox { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; box-shadow: 0 12px 36px rgba(15, 23, 42, .06); }
 .cards div { padding: 18px; display: flex; flex-direction: column; gap: 6px; }
 .cards strong { font-size: 22px; }
 .cards span { color: #6b7280; font-size: 14px; line-height: 1.5; }
@@ -51,9 +51,20 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .scoreItem { padding: 14px; text-align: center; }
 .scoreItem span { display: block; color: #6b7280; font-size: 12px; margin-bottom: 4px; }
 .scoreItem strong { font-size: 24px; color: #2563eb; }
-.infoSection, .promptBox, .ctaBox, .roadmapPreview { padding: 22px; margin: 14px 0; }
+.infoSection, .promptBox, .ctaBox, .roadmapPreview, .quickActionBox { padding: 22px; margin: 14px 0; }
 .infoSection ul, .infoSection ol { margin: 0; padding-left: 22px; line-height: 1.8; color: #374151; }
 .infoSection li + li { margin-top: 6px; }
+.quickActionBox { background: #ecfdf5; border-color: #99f6e4; }
+.quickActionBox .badge { background: #0f766e; }
+.quickActionBox h2 { line-height: 1.45; margin-bottom: 10px; }
+.quickActionBox p:last-child { margin: 0; color: #374151; line-height: 1.7; }
+.collapsibleSection { padding: 0; overflow: hidden; }
+.collapsibleSection summary { position: relative; list-style: none; padding: 18px 48px 18px 22px; cursor: pointer; }
+.collapsibleSection summary::-webkit-details-marker { display: none; }
+.collapsibleSection summary::after { content: "+"; position: absolute; top: 18px; right: 22px; color: #2563eb; font-weight: 900; }
+.collapsibleSection[open] summary::after { content: "-"; }
+.collapsibleSection h2 { margin: 0; line-height: 1.35; }
+.collapsibleSection ul, .collapsibleSection ol { padding: 0 22px 22px 42px; }
 .goalSection p { margin: 0; color: #374151; line-height: 1.8; }
 .goalSection .sectionNote { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; color: #4b5563; }
 .roadmapPreview p { color: #374151; line-height: 1.8; margin: 0 0 16px; }
@@ -91,7 +102,11 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
   .heroNote { font-size: 14px; }
   .cards { grid-template-columns: 1fr; }
   .scoreGrid { grid-template-columns: repeat(2, 1fr); }
-  .questionCard, .infoSection, .promptBox, .ctaBox, .roadmapPreview { border-radius: 18px; padding: 18px; }
+  .questionCard, .infoSection, .promptBox, .ctaBox, .roadmapPreview, .quickActionBox { border-radius: 18px; padding: 18px; }
+  .collapsibleSection { padding: 0; }
+  .collapsibleSection summary { padding: 16px 44px 16px 18px; }
+  .collapsibleSection summary::after { top: 16px; right: 18px; }
+  .collapsibleSection ul, .collapsibleSection ol { padding: 0 18px 18px 36px; }
   .optionList { gap: 10px; margin: 18px 0; }
   .optionButton { padding: 14px; }
   .optionButton span { font-size: 15px; }
