@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ResultContent, Scores } from '../types';
-import { ctas } from '../data/cta';
+import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
 import { glossaryItems } from '../data/glossary';
 import { roadmaps } from '../data/roadmaps';
 import { buildShareUrl } from '../data/share';
@@ -24,11 +24,6 @@ export function ResultPage({ result, scores, onRestart }: Props) {
   const shareUrl = buildShareUrl(result);
   const cta = ctas[result.type];
   const roadmap = roadmaps[result.type];
-  const handleCtaClick = () => {
-    if (cta.url) {
-      window.location.href = cta.url;
-    }
-  };
   const handleCopyResult = async () => {
     const text = formatResultText(result, scores);
 
@@ -110,11 +105,22 @@ export function ResultPage({ result, scores, onRestart }: Props) {
         <p className="experimentCta">
           成功談ではなく、実験ログとして。診断して終わりではなく、運営者自身も進捗・失敗・改善を公開しながら小さく試していきます。
         </p>
-        {!cta.url && <p className="ctaStatus">{cta.pendingMessage}</p>}
-        <button className="primaryButton" disabled={!cta.url} onClick={handleCtaClick}>
-          {cta.url ? cta.buttonLabel : cta.pendingLabel}
-        </button>
       </section>
+
+      <section className="nextReadingBox" aria-labelledby="next-reading-title">
+        <h2 id="next-reading-title">{nextReadingLink.title}</h2>
+        <p>{nextReadingLink.description}</p>
+        <a
+          className="primaryButton nextReadingLink"
+          href={nextReadingLink.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {nextReadingLink.label}
+        </a>
+      </section>
+
+      <p className="responsePrivacyNote">{responsePrivacyNote}</p>
 
       <div className="resultActions">
         <button className="secondaryButton" onClick={handleCopyResult}>結果をコピー</button>

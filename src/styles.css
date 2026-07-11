@@ -27,7 +27,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .ghostButton { border: 1px solid #d1d5db; border-radius: 14px; padding: 12px 16px; background: #fff; color: #374151; font-weight: 700; cursor: pointer; }
 .ghostButton:disabled { opacity: .45; cursor: not-allowed; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 34px 0; }
-.cards div, .questionCard, .infoSection, .promptBox, .ctaBox, .scoreItem, .roadmapPreview, .roadmapPhase, .quickActionBox { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; box-shadow: 0 12px 36px rgba(15, 23, 42, .06); }
+.cards div, .questionCard, .infoSection, .promptBox, .ctaBox, .nextReadingBox, .scoreItem, .roadmapPreview, .roadmapPhase, .quickActionBox { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; box-shadow: 0 12px 36px rgba(15, 23, 42, .06); }
 .cards div { padding: 18px; display: flex; flex-direction: column; gap: 6px; }
 .cards strong { font-size: 22px; }
 .cards span { color: #6b7280; font-size: 14px; line-height: 1.5; }
@@ -51,7 +51,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .scoreItem { padding: 14px; text-align: center; }
 .scoreItem span { display: block; color: #6b7280; font-size: 12px; margin-bottom: 4px; }
 .scoreItem strong { font-size: 24px; color: #2563eb; }
-.infoSection, .promptBox, .ctaBox, .roadmapPreview, .quickActionBox { padding: 22px; margin: 14px 0; }
+.infoSection, .promptBox, .ctaBox, .nextReadingBox, .roadmapPreview, .quickActionBox { padding: 22px; margin: 14px 0; }
 .infoSection ul, .infoSection ol { margin: 0; padding-left: 22px; line-height: 1.8; color: #374151; }
 .infoSection li + li { margin-top: 6px; }
 .quickActionBox { background: #ecfdf5; border-color: #99f6e4; }
@@ -86,10 +86,13 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .promptBox p { color: #dbeafe; line-height: 1.8; }
 .ctaBox { background: linear-gradient(135deg, #eff6ff, #ffffff); }
 .ctaBox p { color: #374151; line-height: 1.8; }
-.ctaBox .ctaStatus { margin: 12px 0 16px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid #dbeafe; color: #1f2937; }
 .ctaPromptList { display: grid; gap: 10px; margin: 16px 0; }
 .ctaPromptList p { margin: 0; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid #dbeafe; }
 .ctaPromptList strong { display: block; margin-bottom: 4px; color: #1d4ed8; }
+.nextReadingBox { background: #eff6ff; border-color: #bfdbfe; }
+.nextReadingBox h2 { margin-top: 0; }
+.nextReadingLink { display: flex; width: 100%; margin-top: 16px; text-decoration: none; }
+.responsePrivacyNote { margin: 14px 4px 0; color: #4b5563; font-size: 14px; line-height: 1.7; }
 .experimentCta { margin: 12px 0 0; padding: 12px 14px; border-radius: 14px; background: #f8fafc; border: 1px solid #e5e7eb; }
 .resultActions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
 .shareButton { background: #111827; box-shadow: none; }
@@ -106,7 +109,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
   .heroNote { font-size: 14px; }
   .cards { grid-template-columns: 1fr; }
   .scoreGrid { grid-template-columns: repeat(2, 1fr); }
-  .questionCard, .infoSection, .promptBox, .ctaBox, .roadmapPreview, .quickActionBox { border-radius: 18px; padding: 18px; }
+  .questionCard, .infoSection, .promptBox, .ctaBox, .nextReadingBox, .roadmapPreview, .quickActionBox { border-radius: 18px; padding: 18px; }
   .collapsibleSection { padding: 0; }
   .collapsibleSection summary { padding: 16px 44px 16px 18px; }
   .collapsibleSection summary::after { top: 16px; right: 18px; }

@@ -1,8 +1,11 @@
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import { ResultPage } from '../components/ResultPage';
 import { calculateScores, pickResultType, resultTypePriority } from './calculateResult';
 import { questions } from '../data/questions';
 import { results } from '../data/results';
-import { ctas } from '../data/cta';
+import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
 import { roadmaps } from '../data/roadmaps';
 import { glossaryItems } from '../data/glossary';
 import { buildShareUrl, shareContent } from '../data/share';
@@ -101,11 +104,42 @@ describe('calculate result', () => {
       const cta = ctas[type];
       expect(cta.title).toBeTruthy();
       expect(cta.description).toBeTruthy();
-      expect(cta.buttonLabel).toBeTruthy();
-      expect(cta.pendingLabel).toBeTruthy();
-      expect(cta.pendingMessage).toBeTruthy();
       expect(cta.notePrompt).toBeTruthy();
       expect(cta.xPrompt).toBeTruthy();
+      expect('pendingLabel' in cta).toBe(false);
+      expect('pendingMessage' in cta).toBe(false);
+    });
+  });
+
+  it('uses one public next-reading link and explains how answers are handled', () => {
+    expect(nextReadingLink).toEqual({
+      title: '次に読むなら',
+      description:
+        'AIツール選びで迷う人向けに、目的別の使い分けと課金の目安をまとめています。',
+      label: 'AIツール80選を読む',
+      url: 'https://note.com/y_ai_lab_jp/n/n5664125b1e20',
+    });
+    expect(responsePrivacyNote).toBe(
+      '質問への回答は、このページ内だけで診断に使います。回答を保存したり、外部へ送信したりしません。'
+    );
+  });
+
+  it('renders the common next-reading link for every result type without a disabled pending CTA', () => {
+    resultTypes.forEach((type) => {
+      const markup = renderToStaticMarkup(
+        createElement(ResultPage, {
+          result: results[type],
+          scores: { writing: 1, creative: 1, tool: 1, research: 1 },
+          onRestart: () => undefined,
+        })
+      );
+
+      expect(markup).toContain(nextReadingLink.url);
+      expect(markup).toContain('target="_blank"');
+      expect(markup).toContain('rel="noopener noreferrer"');
+      expect(markup).toContain(responsePrivacyNote);
+      expect(markup).not.toContain('disabled');
+      expect(markup).not.toContain('詳細版は準備中');
     });
   });
 

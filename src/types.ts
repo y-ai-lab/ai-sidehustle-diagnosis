@@ -37,12 +37,8 @@ export type ResultContent = {
 export type CtaContent = {
   title: string;
   description: string;
-  buttonLabel: string;
-  pendingLabel: string;
-  pendingMessage: string;
   notePrompt: string;
   xPrompt: string;
-  url?: string;
 };
 
 export type RoadmapPhase = {
