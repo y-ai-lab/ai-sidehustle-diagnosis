@@ -246,7 +246,7 @@ describe('calculate result', () => {
     });
   });
 
-  it('formats concise copy text for every result type', () => {
+  it('formats a complete, saveable result copy for every result type', () => {
     const scores = {
       writing: 12,
       creative: 3,
@@ -257,16 +257,60 @@ describe('calculate result', () => {
     resultTypes.forEach((type) => {
       const text = formatResultText(results[type], scores);
       expect(text).toContain('【現実派AI副業診断】');
+      expect(text).toContain('■ 主タイプ名');
       expect(text).toContain(results[type].shortTitle);
-      expect(text).toContain(`（${results[type].title}）`);
+      expect(text).toContain('■ 副タイプ名');
+      expect(text).toContain(results[type].title);
+      expect(text).toContain('■ タイプの説明');
+      expect(text).toContain(results[type].tagline);
+      expect(text).toContain('■ 全スコア');
       expect(text).toContain('・文章 12/23');
       expect(text).toContain('・画像・制作 3/21');
       expect(text).toContain('・ツール開発 5/30');
       expect(text).toContain('・リサーチ 7/24');
+      expect(text).toContain('■ 最高スコア');
+      expect(text).toContain('■ 強み');
+      expect(text).toContain('■ つまずきやすいポイント');
+      expect(text).toContain('■ 向いている稼ぎ方');
+      expect(text).toContain('■ 向いていない稼ぎ方');
+      expect(text).toContain('■ まず今日やること');
       expect(text).toContain(results[type].firstSteps[0]);
+      expect(text).toContain('■ 7日間の行動計画');
+      expect(text).toContain('・Day1:');
+      expect(text).toContain('・Day7:');
+      expect(text).toContain('■ 30日後の目標');
+      expect(text).toContain(results[type].goalAfter30Days);
+      expect(text).toContain('■ 最初の商品案');
+      expect(text).toContain('■ お金につなげる流れ');
+      expect(text).toContain('■ おすすめのAIツール');
+      expect(text).toContain('■ 課金判断');
+      expect(text).toContain('■ 実践時の注意点');
+      expect(text).toContain('■ 保存の目安');
+      expect(text).toContain('この結果をメモなどに貼り付けて、7日間の実践中に見返してください。');
+      expect(text).toContain('■ 診断サイトURL');
       expect(text).toContain(shareContent.siteUrl);
-      expect(text).not.toContain('7日間の行動計画');
       expect(text).not.toContain('undefined');
+      expect(text).not.toContain('null');
+      expect(text).not.toContain('AIツール80選を読む');
+      expect(text).not.toContain('この診断を作って改善した記録を読む');
+      expect(text).not.toContain('Xで実験の続きを見る');
+    });
+  });
+
+  it('shows the full-copy guidance and keeps the short X share action for every result type', () => {
+    resultTypes.forEach((type) => {
+      const markup = renderToStaticMarkup(
+        createElement(ResultPage, {
+          result: results[type],
+          scores: { writing: 1, creative: 1, tool: 1, research: 1 },
+          onRestart: () => undefined,
+        })
+      );
+
+      expect(markup).toContain('診断結果を全文コピー');
+      expect(markup).toContain('結果を全文コピーして、メモ帳・Notion・Obsidianなどに貼り付けておくと、7日間の実践中に見返せます。');
+      expect(markup).toContain('Xでシェア');
+      expect(markup).toContain('もう一度診断する');
     });
   });
 

@@ -103,6 +103,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .ownerProfileLink { display: inline-flex; min-height: 44px; align-items: center; margin-top: 12px; color: #374151; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .ownerExperimentBox a:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
 .responsePrivacyNote { margin: 14px 4px 0; color: #4b5563; font-size: 14px; line-height: 1.7; }
+.copyResultHelp { margin: 18px 4px 0; color: #4b5563; font-size: 14px; line-height: 1.7; }
 .experimentCta { margin: 12px 0 0; padding: 12px 14px; border-radius: 14px; background: #f8fafc; border: 1px solid #e5e7eb; }
 .resultActions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
 .shareButton { background: #111827; box-shadow: none; }

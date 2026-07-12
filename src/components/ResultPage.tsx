@@ -123,12 +123,13 @@ export function ResultPage({ result, scores, onRestart }: Props) {
 
       <p className="responsePrivacyNote">{responsePrivacyNote}</p>
 
+      <p className="copyResultHelp">結果を全文コピーして、メモ帳・Notion・Obsidianなどに貼り付けておくと、7日間の実践中に見返せます。</p>
       <div className="resultActions">
-        <button className="secondaryButton" onClick={handleCopyResult}>結果をコピー</button>
+        <button className="secondaryButton" onClick={handleCopyResult}>診断結果を全文コピー</button>
         <a className="shareButton" href={shareUrl} target="_blank" rel="noopener noreferrer">Xでシェア</a>
         <button className="ghostButton" onClick={onRestart}>もう一度診断する</button>
       </div>
-      {copyStatus === 'success' && <p className="copyStatus">コピーしました</p>}
+      {copyStatus === 'success' && <p className="copyStatus">全文をコピーしました。メモなどに貼り付けて保存してください。</p>}
       {copyStatus === 'error' && <p className="copyStatus error">コピーできませんでした。もう一度お試しください。</p>}
     </main>
   );
