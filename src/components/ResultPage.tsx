@@ -4,6 +4,8 @@ import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
 import { glossaryItems } from '../data/glossary';
 import { roadmaps } from '../data/roadmaps';
 import { buildShareUrl } from '../data/share';
+import { copyTextToClipboard } from '../utils/copyText';
+import { getScoreSummaries } from '../utils/calculateResult';
 import { formatResultText } from '../utils/formatResultText';
 
 type Props = {
@@ -12,26 +14,23 @@ type Props = {
   onRestart: () => void;
 };
 
-const labelMap: Record<keyof Scores, string> = {
-  writing: '文章',
-  creative: '画像/制作',
-  tool: 'ツール開発',
-  research: 'リサーチ',
-};
-
 export function ResultPage({ result, scores, onRestart }: Props) {
   const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const shareUrl = buildShareUrl(result);
+  const scoreSummaries = getScoreSummaries(scores);
+  const shareUrl = buildShareUrl(result, scores);
   const cta = ctas[result.type];
   const roadmap = roadmaps[result.type];
   const handleCopyResult = async () => {
     const text = formatResultText(result, scores);
 
-    try {
-      await navigator.clipboard.writeText(text);
+    const status = await copyTextToClipboard(text);
+
+    if (status === 'success') {
       setCopyStatus('success');
-    } catch {
+      window.setTimeout(() => setCopyStatus('idle'), 2500);
+    } else {
       setCopyStatus('error');
+      window.setTimeout(() => setCopyStatus('idle'), 2500);
     }
   };
 
@@ -45,10 +44,11 @@ export function ResultPage({ result, scores, onRestart }: Props) {
       </div>
 
       <section className="scoreGrid">
-        {Object.entries(scores).map(([key, value]) => (
-          <div key={key} className="scoreItem">
-            <span>{labelMap[key as keyof Scores]}</span>
-            <strong>{value}</strong>
+        {scoreSummaries.map((score) => (
+          <div key={score.type} className="scoreItem">
+            <span>{score.label}</span>
+            <strong>{score.score}/{score.maxScore}</strong>
+            {score.isHighest && <span className="scoreAxisLabel">あなたの軸</span>}
           </div>
         ))}
       </section>
@@ -124,11 +124,11 @@ export function ResultPage({ result, scores, onRestart }: Props) {
 
       <div className="resultActions">
         <button className="secondaryButton" onClick={handleCopyResult}>結果をコピー</button>
-        <a className="shareButton" href={shareUrl} target="_blank" rel="noreferrer">Xでシェア</a>
+        <a className="shareButton" href={shareUrl} target="_blank" rel="noopener noreferrer">Xでシェア</a>
         <button className="ghostButton" onClick={onRestart}>もう一度診断する</button>
       </div>
-      {copyStatus === 'success' && <p className="copyStatus">結果をコピーしました。noteやメモに貼り付けできます。</p>}
-      {copyStatus === 'error' && <p className="copyStatus error">コピーできませんでした。ブラウザの権限を確認してください。</p>}
+      {copyStatus === 'success' && <p className="copyStatus">コピーしました</p>}
+      {copyStatus === 'error' && <p className="copyStatus error">コピーできませんでした。もう一度お試しください。</p>}
     </main>
   );
 }

@@ -2,6 +2,17 @@ export type ResultType = 'writing' | 'creative' | 'tool' | 'research';
 
 export type Scores = Record<ResultType, number>;
 
+export type ScoreDefinition = {
+  label: string;
+  maxScore: number;
+};
+
+export type ScoreSummary = ScoreDefinition & {
+  type: ResultType;
+  score: number;
+  isHighest: boolean;
+};
+
 export type Option = {
   label: string;
   description?: string;
@@ -18,6 +29,7 @@ export type Question = {
 export type ResultContent = {
   type: ResultType;
   title: string;
+  shortTitle: string;
   tagline: string;
   strengths: string[];
   weaknesses: string[];
@@ -55,9 +67,7 @@ export type RoadmapContent = {
 
 export type ShareContent = {
   siteName: string;
-  messageTemplate: string;
-  hashtags: string[];
-  siteUrl?: string;
+  siteUrl: string;
 };
 
 export type GlossaryItem = {

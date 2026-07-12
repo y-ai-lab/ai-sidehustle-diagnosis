@@ -1,16 +1,17 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ResultPage } from '../components/ResultPage';
-import { calculateScores, pickResultType, resultTypePriority } from './calculateResult';
+import { calculateScores, getScoreSummaries, pickResultType, resultTypePriority, scoreDefinitions, scoreTypes } from './calculateResult';
 import { questions } from '../data/questions';
 import { results } from '../data/results';
 import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
 import { roadmaps } from '../data/roadmaps';
 import { glossaryItems } from '../data/glossary';
-import { buildShareUrl, shareContent } from '../data/share';
+import { buildShareUrl, formatHighestScoreText, shareContent } from '../data/share';
 import { formatResultText } from './formatResultText';
-import type { ResultType } from '../types';
+import { copyTextToClipboard } from './copyText';
+import type { ResultType, Scores } from '../types';
 
 const resultTypes: ResultType[] = ['writing', 'creative', 'tool', 'research'];
 
@@ -68,6 +69,7 @@ describe('calculate result', () => {
       const result = results[type];
       expect(result.type).toBe(type);
       expect(result.title).toBeTruthy();
+      expect(result.shortTitle).toBeTruthy();
       expect(result.tagline).toBeTruthy();
       expect(result.strengths.length).toBeGreaterThan(0);
       expect(result.weaknesses.length).toBeGreaterThan(0);
@@ -181,32 +183,79 @@ describe('calculate result', () => {
 
   it('builds editable X share URLs', () => {
     expect(shareContent.siteName).toBeTruthy();
-    expect(shareContent.messageTemplate).toContain('{resultTitle}');
-    expect(shareContent.hashtags.length).toBeGreaterThan(0);
 
-    const url = buildShareUrl(results.writing);
-    expect(url).toContain('https://twitter.com/intent/tweet?');
-    expect(decodeURIComponent(url)).toContain(results.writing.title);
-    expect(decodeURIComponent(url)).toContain(shareContent.hashtags[0]);
+    resultTypes.forEach((type) => {
+      const url = buildShareUrl(results[type], { writing: 12, creative: 3, tool: 5, research: 7 });
+      const shareText = new URL(url).searchParams.get('text') ?? '';
+      expect(url).toContain('https://twitter.com/intent/tweet?');
+      expect(shareText).toContain(results[type].shortTitle);
+      expect(shareText).not.toContain(results[type].title);
+      expect(shareText).toContain('文章 12/23が一番高かった。');
+      expect(shareText).toContain(shareContent.siteUrl);
+      expect(shareText).toContain('#AI副業');
+      expect(shareText).not.toContain('現実派AI副業診断');
+    });
   });
 
-  it('formats result text for copy and note drafts', () => {
-    const text = formatResultText(results.writing, {
+  it('formats concise copy text for every result type', () => {
+    const scores = {
       writing: 12,
       creative: 3,
       tool: 5,
       research: 7,
-    });
+    };
 
-    expect(text).toContain('【現実派AI副業診断】');
-    expect(text).toContain(`診断結果: ${results.writing.title}`);
-    expect(text).toContain('最初の3ステップ');
-    expect(text).toContain('お金につなげる流れ');
-    expect(text).toContain('最初の商品案');
-    expect(text).toContain('7日間の行動計画');
-    expect(text).toContain('30日後の目標');
-    expect(text).toContain('注意点');
-    expect(text).toContain('ツールにお金をかけるかの目安');
-    expect(text).toContain(shareContent.siteUrl);
+    resultTypes.forEach((type) => {
+      const text = formatResultText(results[type], scores);
+      expect(text).toContain('【現実派AI副業診断】');
+      expect(text).toContain(results[type].shortTitle);
+      expect(text).toContain(`（${results[type].title}）`);
+      expect(text).toContain('・文章 12/23');
+      expect(text).toContain('・画像・制作 3/21');
+      expect(text).toContain('・ツール開発 5/30');
+      expect(text).toContain('・リサーチ 7/24');
+      expect(text).toContain(results[type].firstSteps[0]);
+      expect(text).toContain(shareContent.siteUrl);
+      expect(text).not.toContain('7日間の行動計画');
+      expect(text).not.toContain('undefined');
+    });
+  });
+
+  it('uses the actual per-score maximums and compares axes by ratio', () => {
+    const calculatedMaximums = scoreTypes.reduce((totals, type) => {
+      totals[type] = questions.reduce(
+        (total, question) => total + Math.max(...question.options.map((option) => option.scores[type] ?? 0)),
+        0
+      );
+      return totals;
+    }, {} as Scores);
+
+    expect(scoreDefinitions).toEqual({
+      writing: { label: '文章', maxScore: 23 },
+      creative: { label: '画像・制作', maxScore: 21 },
+      tool: { label: 'ツール開発', maxScore: 30 },
+      research: { label: 'リサーチ', maxScore: 24 },
+    });
+    expect(Object.fromEntries(scoreTypes.map((type) => [type, scoreDefinitions[type].maxScore]))).toEqual(calculatedMaximums);
+
+    const summaries = getScoreSummaries({ writing: 0, creative: 9, tool: 10, research: 0 });
+    expect(summaries.filter((score) => score.isHighest).map((score) => score.type)).toEqual(['creative']);
+  });
+
+  it('keeps every exact ratio tie as an axis and in X share text', () => {
+    const tiedScores = { writing: 23, creative: 21, tool: 30, research: 24 };
+    expect(getScoreSummaries(tiedScores).filter((score) => score.isHighest)).toHaveLength(4);
+    expect(formatHighestScoreText(tiedScores)).toBe(
+      '文章 23/23・画像・制作 21/21・ツール開発 30/30・リサーチ 24/24が同率で高かった。'
+    );
+  });
+
+  it('reports both successful and failed copy attempts', async () => {
+    const successfulWriter = { writeText: vi.fn().mockResolvedValue(undefined) };
+    const failedWriter = { writeText: vi.fn().mockRejectedValue(new Error('denied')) };
+
+    await expect(copyTextToClipboard('copy me', successfulWriter)).resolves.toBe('success');
+    await expect(copyTextToClipboard('copy me', failedWriter)).resolves.toBe('error');
+    await expect(copyTextToClipboard('copy me', undefined)).resolves.toBe('error');
   });
 });

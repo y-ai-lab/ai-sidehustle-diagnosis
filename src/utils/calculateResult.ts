@@ -1,6 +1,15 @@
-import type { Question, ResultType, Scores } from '../types';
+import type { Question, ResultType, ScoreDefinition, ScoreSummary, Scores } from '../types';
 
 export const resultTypePriority: ResultType[] = ['tool', 'research', 'writing', 'creative'];
+
+export const scoreTypes: ResultType[] = ['writing', 'creative', 'tool', 'research'];
+
+export const scoreDefinitions: Record<ResultType, ScoreDefinition> = {
+  writing: { label: '文章', maxScore: 23 },
+  creative: { label: '画像・制作', maxScore: 21 },
+  tool: { label: 'ツール開発', maxScore: 30 },
+  research: { label: 'リサーチ', maxScore: 24 },
+};
 
 export const initialScores = (): Scores => ({
   writing: 0,
@@ -29,4 +38,20 @@ export function pickResultType(scores: Scores): ResultType {
     if (diff !== 0) return diff;
     return resultTypePriority.indexOf(a) - resultTypePriority.indexOf(b);
   })[0];
+}
+
+export function getScoreSummaries(scores: Scores): ScoreSummary[] {
+  const highestTypes = scoreTypes.filter((type) =>
+    scoreTypes.every((otherType) =>
+      scores[type] * scoreDefinitions[otherType].maxScore >=
+      scores[otherType] * scoreDefinitions[type].maxScore
+    )
+  );
+
+  return scoreTypes.map((type) => ({
+    type,
+    score: scores[type],
+    ...scoreDefinitions[type],
+    isHighest: highestTypes.includes(type),
+  }));
 }

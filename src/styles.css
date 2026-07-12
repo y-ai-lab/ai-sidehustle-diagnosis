@@ -51,6 +51,7 @@ h1, h2, p, li, button, a, summary { overflow-wrap: anywhere; }
 .scoreItem { padding: 14px; text-align: center; }
 .scoreItem span { display: block; color: #6b7280; font-size: 12px; margin-bottom: 4px; }
 .scoreItem strong { font-size: 24px; color: #2563eb; }
+.scoreItem .scoreAxisLabel { display: inline-flex; width: fit-content; margin: 8px auto 0; padding: 3px 8px; border-radius: 999px; background: #e8f1ff; color: #1d4ed8; font-size: 11px; font-weight: 800; line-height: 1.3; }
 .infoSection, .promptBox, .ctaBox, .nextReadingBox, .roadmapPreview, .quickActionBox { padding: 22px; margin: 14px 0; }
 .infoSection ul, .infoSection ol { margin: 0; padding-left: 22px; line-height: 1.8; color: #374151; }
 .infoSection li + li { margin-top: 6px; }

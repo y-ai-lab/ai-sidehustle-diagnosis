@@ -4,6 +4,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
   writing: {
     type: 'writing',
     title: 'AIライティング・コンテンツ型',
+    shortTitle: '書いて伝えるタイプ',
     tagline: 'AIで下書きを作り、投稿・記事・ひな形に整えて小さく売るタイプです。',
     strengths: [
       '自分の体験や考えを、言葉にして整理するのが得意です',
@@ -70,6 +71,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
   creative: {
     type: 'creative',
     title: 'AI画像/POD・クリエイター型',
+    shortTitle: '見た目で伝えるタイプ',
     tagline: 'AI画像やデザイン案を作り、素材・グッズ・SNS用画像として試すタイプです。',
     strengths: [
       '言葉だけで考えるより、見た目や雰囲気から形にするのが得意です',
@@ -136,6 +138,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
   tool: {
     type: 'tool',
     title: 'ノーコード/ミニツール開発型',
+    shortTitle: '小さな道具を作るタイプ',
     tagline: '小さな診断・計算・比較ツールを作り、役立つ入口から収益導線を作るタイプです。',
     strengths: [
       '面倒な作業を見つけて、少し楽にする方法を考えるのが得意です',
@@ -202,6 +205,7 @@ export const results: Record<ResultContent['type'], ResultContent> = {
   research: {
     type: 'research',
     title: 'リサーチ・まとめメディア型',
+    shortTitle: '調べてまとめるタイプ',
     tagline: 'AIで調べて比較し、初心者向けの記事やニュースレターに整えるタイプです。',
     strengths: [
       'いきなり発信するより、まず調べて整理してから動くのが得意です',

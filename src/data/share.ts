@@ -1,22 +1,40 @@
-import type { ResultContent, ShareContent } from '../types';
+import type { ResultContent, Scores, ShareContent } from '../types';
+import { getScoreSummaries } from '../utils/calculateResult';
 
 export const shareContent: ShareContent = {
   siteName: '現実派AI副業診断',
-  messageTemplate: 'AI副業診断をやってみた。結果は「{resultTitle}」。完璧を目指さず、まず今日1つだけ小さく試してみます。運営者も実験ログとして進捗・失敗・改善を公開中。',
-  hashtags: ['現実派AI副業診断', 'AI副業'],
   siteUrl: 'https://y-ai-lab.github.io/ai-sidehustle-diagnosis/',
 };
 
-export function buildShareUrl(result: ResultContent): string {
-  const text = shareContent.messageTemplate.replace('{resultTitle}', result.title);
-  const params = new URLSearchParams({
-    text,
-    hashtags: shareContent.hashtags.join(','),
-  });
+function formatHighestScoreText(scores: Scores): string {
+  const highestScores = getScoreSummaries(scores).filter((score) => score.isHighest);
+  const scoreText = highestScores
+    .map((score) => `${score.label} ${score.score}/${score.maxScore}`)
+    .join('・');
 
-  if (shareContent.siteUrl) {
-    params.set('url', shareContent.siteUrl);
-  }
+  return highestScores.length === 1
+    ? `${scoreText}が一番高かった。`
+    : `${scoreText}が同率で高かった。`;
+}
+
+export function buildShareUrl(result: ResultContent, scores: Scores): string {
+  const text = [
+    'AI副業タイプ診断やってみた。',
+    '',
+    '結果は',
+    `「${result.shortTitle}」でした。`,
+    '',
+    formatHighestScoreText(scores),
+    '',
+    '10問・約3分・無料です。',
+    shareContent.siteUrl,
+    '',
+    '#AI副業',
+  ].join('\n');
+
+  const params = new URLSearchParams({ text });
 
   return `https://twitter.com/intent/tweet?${params.toString()}`;
 }
+
+export { formatHighestScoreText };
