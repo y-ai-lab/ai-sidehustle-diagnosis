@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ResultContent, Scores } from '../types';
-import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
+import { ctas, nextReadingLink, ownerExperimentLinks, responsePrivacyNote } from '../data/cta';
 import { glossaryItems } from '../data/glossary';
 import { roadmaps } from '../data/roadmaps';
 import { buildShareUrl } from '../data/share';
@@ -66,6 +66,7 @@ export function ResultPage({ result, scores, onRestart }: Props) {
       <InfoSection title="お金につなげる流れ" items={result.monetizationRoute} ordered />
       <InfoSection title="最初の商品案" items={result.firstProductIdeas} collapsible />
       <InfoSection title="7日間の行動計画" items={result.roadmap7Days} collapsible defaultOpen />
+      <OwnerExperimentSection />
       <section className="infoSection goalSection">
         <h2>30日後の目標</h2>
         <p>{result.goalAfter30Days}</p>
@@ -130,6 +131,42 @@ export function ResultPage({ result, scores, onRestart }: Props) {
       {copyStatus === 'success' && <p className="copyStatus">コピーしました</p>}
       {copyStatus === 'error' && <p className="copyStatus error">コピーできませんでした。もう一度お試しください。</p>}
     </main>
+  );
+}
+
+function OwnerExperimentSection() {
+  return (
+    <section className="ownerExperimentBox" aria-labelledby="owner-experiment-title">
+      <h2 id="owner-experiment-title">{ownerExperimentLinks.title}</h2>
+      <div className="ownerExperimentText">
+        {ownerExperimentLinks.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+      <a
+        className="primaryButton ownerExperimentPrimary"
+        href={ownerExperimentLinks.improvementNote.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {ownerExperimentLinks.improvementNote.label}
+      </a>
+      <p className="ownerExperimentXDescription">{ownerExperimentLinks.x.description}</p>
+      <a
+        className="ownerExperimentXLink"
+        href={ownerExperimentLinks.x.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {ownerExperimentLinks.x.label}
+      </a>
+      <a
+        className="ownerProfileLink"
+        href={ownerExperimentLinks.profileNote.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {ownerExperimentLinks.profileNote.label}
+      </a>
+    </section>
   );
 }
 

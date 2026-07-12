@@ -11,6 +11,28 @@ export const nextReadingLink = {
 export const responsePrivacyNote =
   '質問への回答は、このページ内だけで診断に使います。回答を保存したり、外部へ送信したりしません。';
 
+export const ownerExperimentLinks = {
+  title: 'この診断を作った人も、同じように試しています',
+  paragraphs: [
+    'この診断は、完成された成功ノウハウではありません。',
+    '運営者自身も診断結果を使いながら、AI副業を小さく試しています。',
+    'うまくいったことだけではなく、迷ったことや失敗したこと、サイトを直した過程もnoteとXに残しています。',
+  ],
+  improvementNote: {
+    label: 'この診断を作って改善した記録を読む',
+    url: 'https://note.com/y_ai_lab_jp/n/n62f7bd33385b',
+  },
+  x: {
+    label: 'Xで実験の続きを見る',
+    description: 'サイトの改善、AI副業で試したこと、うまくいかなかったこともそのまま記録しています。',
+    url: 'https://x.com/y_ai_lab_jp',
+  },
+  profileNote: {
+    label: '運営者について知る → 自己紹介note',
+    url: 'https://note.com/y_ai_lab_jp/n/n3e741a74b009',
+  },
+} as const;
+
 export const ctas: Record<ResultType, CtaContent> = {
   writing: {
     title: '今日の小さな一歩を記録する',

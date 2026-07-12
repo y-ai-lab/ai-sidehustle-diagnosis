@@ -5,7 +5,7 @@ import { ResultPage } from '../components/ResultPage';
 import { calculateScores, getScoreSummaries, pickResultType, resultTypePriority, scoreDefinitions, scoreTypes } from './calculateResult';
 import { questions } from '../data/questions';
 import { results } from '../data/results';
-import { ctas, nextReadingLink, responsePrivacyNote } from '../data/cta';
+import { ctas, nextReadingLink, ownerExperimentLinks, responsePrivacyNote } from '../data/cta';
 import { roadmaps } from '../data/roadmaps';
 import { glossaryItems } from '../data/glossary';
 import { buildShareUrl, formatHighestScoreText, shareContent } from '../data/share';
@@ -142,6 +142,55 @@ describe('calculate result', () => {
       expect(markup).toContain(responsePrivacyNote);
       expect(markup).not.toContain('disabled');
       expect(markup).not.toContain('詳細版は準備中');
+    });
+  });
+
+  it('renders one common owner experiment block after the 7-day plan for every result type', () => {
+    expect(ownerExperimentLinks).toEqual({
+      title: 'この診断を作った人も、同じように試しています',
+      paragraphs: [
+        'この診断は、完成された成功ノウハウではありません。',
+        '運営者自身も診断結果を使いながら、AI副業を小さく試しています。',
+        'うまくいったことだけではなく、迷ったことや失敗したこと、サイトを直した過程もnoteとXに残しています。',
+      ],
+      improvementNote: {
+        label: 'この診断を作って改善した記録を読む',
+        url: 'https://note.com/y_ai_lab_jp/n/n62f7bd33385b',
+      },
+      x: {
+        label: 'Xで実験の続きを見る',
+        description: 'サイトの改善、AI副業で試したこと、うまくいかなかったこともそのまま記録しています。',
+        url: 'https://x.com/y_ai_lab_jp',
+      },
+      profileNote: {
+        label: '運営者について知る → 自己紹介note',
+        url: 'https://note.com/y_ai_lab_jp/n/n3e741a74b009',
+      },
+    });
+
+    resultTypes.forEach((type) => {
+      const markup = renderToStaticMarkup(
+        createElement(ResultPage, {
+          result: results[type],
+          scores: { writing: 1, creative: 1, tool: 1, research: 1 },
+          onRestart: () => undefined,
+        })
+      );
+
+      expect(markup).toContain(ownerExperimentLinks.title);
+      expect(markup).toContain(ownerExperimentLinks.improvementNote.url);
+      expect(markup).toContain(ownerExperimentLinks.x.url);
+      expect(markup).toContain(ownerExperimentLinks.profileNote.url);
+      expect(markup.match(/target="_blank"/g)).toHaveLength(5);
+      expect(markup.match(/rel="noopener noreferrer"/g)).toHaveLength(5);
+      expect(markup.indexOf('7日間の行動計画')).toBeLessThan(markup.indexOf(ownerExperimentLinks.title));
+      expect(markup.indexOf(ownerExperimentLinks.title)).toBeLessThan(markup.indexOf('30日後の目標'));
+      expect(markup.match(new RegExp(nextReadingLink.url, 'g'))).toHaveLength(1);
+      expect(markup).not.toContain('Day1 note');
+      expect(markup).not.toContain('Day2 note');
+      expect(markup).not.toContain('Day3 note');
+      expect(markup).not.toContain('Day4 note');
+      expect(markup).not.toContain('AI診断サイトをアップデートしました');
     });
   });
 
